@@ -1,0 +1,6 @@
+{
+  "name": "redecho-backend",
+  "region": "us-east",
+  "buildCommand": "npm install",
+  "startCommand": "npm start"
+}

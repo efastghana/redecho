@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "envs": [
+    {
+      "key": "VITE_API_URL",
+      "value": "https://redecho-backend.onrender.com/api"
+    }
+  ]
+}
