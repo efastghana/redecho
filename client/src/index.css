@@ -30,3 +30,16 @@ body {
 .emotion-badge {
   @apply inline-block px-3 py-1 rounded-full text-sm font-medium bg-red-primary text-white;
 }
+
+/* Light mode overrides */
+.light-mode .card {
+  @apply bg-light-secondary;
+}
+
+.light-mode .btn-secondary {
+  @apply bg-light-secondary hover:bg-light-hover text-text-dark border-light-hover;
+}
+
+.light-mode .input-field {
+  @apply bg-light-secondary text-text-dark border-light-hover placeholder-text-dark-grey;
+}

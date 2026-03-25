@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import api from '../services/api';
 
-export const CommentSection = ({ storyId, comments, onCommentAdded }) => {
+export const CommentSection = ({ storyId, comments, onCommentAdded, isDarkMode = true }) => {
   const { user } = useContext(UserContext);
   const [newComment, setNewComment] = useState('');
   const [loading, setLoading] = useState(false);
@@ -54,7 +54,7 @@ export const CommentSection = ({ storyId, comments, onCommentAdded }) => {
 
   return (
     <div className="mt-8">
-      <h3 className="text-xl font-bold text-text-light mb-4">Advice & Support</h3>
+      <h3 className={`text-xl font-bold mb-4 ${isDarkMode ? 'text-text-light' : 'text-text-dark'}`}>Advice & Support</h3>
 
       <form onSubmit={handleAddComment} className="mb-6">
         <textarea
@@ -82,17 +82,17 @@ export const CommentSection = ({ storyId, comments, onCommentAdded }) => {
 
       <div className="space-y-4">
         {displayComments.map(comment => (
-          <div key={comment._id} className="card p-4 border border-dark-bg">
+          <div key={comment._id} className={`card p-4 ${isDarkMode ? 'border border-dark-bg bg-dark-secondary' : 'border border-light-hover bg-light-secondary'}`}>
             <div className="flex justify-between items-start mb-2">
-              <p className="text-text-grey text-sm">@{comment.username}</p>
-              <p className="text-text-grey text-xs">{formatDate(comment.createdAt)}</p>
+              <p className={`text-sm ${isDarkMode ? 'text-text-grey' : 'text-text-dark-grey'}`}>@{comment.username}</p>
+              <p className={`text-xs ${isDarkMode ? 'text-text-grey' : 'text-text-dark-grey'}`}>{formatDate(comment.createdAt)}</p>
             </div>
-            <p className="text-text-light">{comment.content}</p>
+            <p className={isDarkMode ? 'text-text-light' : 'text-text-dark'}>{comment.content}</p>
           </div>
         ))}
 
         {displayComments.length === 0 && (
-          <p className="text-text-grey text-center py-8">No comments yet. Be the first to share advice!</p>
+          <p className={`text-center py-8 ${isDarkMode ? 'text-text-grey' : 'text-text-dark-grey'}`}>No comments yet. Be the first to share advice!</p>
         )}
       </div>
     </div>

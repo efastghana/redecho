@@ -4,7 +4,7 @@ import { UserContext } from '../context/UserContext';
 import { CommentSection } from '../components/CommentSection';
 import api from '../services/api';
 
-export const StoryDetails = () => {
+export const StoryDetails = ({ isDarkMode = true }) => {
   const { id } = useParams();
   const { user } = useContext(UserContext);
   const [story, setStory] = useState(null);
@@ -82,13 +82,13 @@ export const StoryDetails = () => {
   ];
 
   if (loading) return (
-    <div className="min-h-screen bg-dark-bg flex items-center justify-center">
-      <p className="text-text-grey">Loading story...</p>
+    <div className={`min-h-screen ${isDarkMode ? 'bg-dark-bg' : 'bg-light-bg'} flex items-center justify-center`}>
+      <p className={isDarkMode ? 'text-text-grey' : 'text-text-dark-grey'}>Loading story...</p>
     </div>
   );
 
   if (error) return (
-    <div className="min-h-screen bg-dark-bg flex items-center justify-center">
+    <div className={`min-h-screen ${isDarkMode ? 'bg-dark-bg' : 'bg-light-bg'} flex items-center justify-center`}>
       <div className="text-center">
         <p className="text-red-primary mb-4">{error}</p>
         <Link to="/" className="btn-primary">Back to Home</Link>
@@ -97,8 +97,8 @@ export const StoryDetails = () => {
   );
 
   if (!story) return (
-    <div className="min-h-screen bg-dark-bg flex items-center justify-center">
-      <p className="text-text-grey">Story not found</p>
+    <div className={`min-h-screen ${isDarkMode ? 'bg-dark-bg' : 'bg-light-bg'} flex items-center justify-center`}>
+      <p className={isDarkMode ? 'text-text-grey' : 'text-text-dark-grey'}>Story not found</p>
     </div>
   );
 
@@ -113,26 +113,26 @@ export const StoryDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-dark-bg">
+    <div className={`min-h-screen ${isDarkMode ? 'bg-dark-bg' : 'bg-light-bg'}`}>
       <div className="max-w-3xl mx-auto px-4 py-8">
         <Link to="/" className="text-red-primary hover:text-red-700 mb-6 inline-block">← Back to Stories</Link>
 
-        <div className="card p-8 border border-dark-bg">
+        <div className={`card p-8 ${isDarkMode ? 'border border-dark-bg bg-dark-secondary' : 'border border-light-hover bg-light-secondary'}`}>
           <div className="mb-6">
             <div className="flex justify-between items-start mb-4">
               <div>
-                <p className="text-text-grey text-sm mb-1">@{story.username}</p>
-                <p className="text-text-grey text-xs">{formatDate(story.createdAt)}</p>
+                <p className={`text-sm mb-1 ${isDarkMode ? 'text-text-grey' : 'text-text-dark-grey'}`}>@{story.username}</p>
+                <p className={`text-xs ${isDarkMode ? 'text-text-grey' : 'text-text-dark-grey'}`}>{formatDate(story.createdAt)}</p>
               </div>
-              <span className="emotion-badge">{story.emotion}</span>
+              <span className={`emotion-badge ${isDarkMode ? '' : 'bg-red-primary text-white'}`}>{story.emotion}</span>
             </div>
 
-            <h1 className="text-3xl font-bold text-text-light mb-4">{story.title}</h1>
-            <p className="text-text-light leading-relaxed text-lg whitespace-pre-wrap">{story.content}</p>
+            <h1 className={`text-3xl font-bold mb-4 ${isDarkMode ? 'text-text-light' : 'text-text-dark'}`}>{story.title}</h1>
+            <p className={`leading-relaxed text-lg whitespace-pre-wrap ${isDarkMode ? 'text-text-light' : 'text-text-dark'}`}>{story.content}</p>
           </div>
 
-          <div className="border-t border-dark-bg pt-6">
-            <p className="text-text-grey text-sm mb-4">React to this story:</p>
+          <div className={`border-t pt-6 ${isDarkMode ? 'border-dark-bg' : 'border-light-hover'}`}>
+            <p className={`text-sm mb-4 ${isDarkMode ? 'text-text-grey' : 'text-text-dark-grey'}`}>React to this story:</p>
             <div className="flex flex-wrap gap-3">
               {reactions.map(reaction => (
                 <button
@@ -142,7 +142,9 @@ export const StoryDetails = () => {
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg transition duration-200 cursor-pointer font-medium disabled:opacity-50 disabled:cursor-not-allowed ${
                     userReactions[reaction.type]
                       ? 'bg-red-primary text-white shadow-lg hover:bg-red-700 scale-105'
-                      : 'bg-dark-secondary text-text-light hover:bg-dark-bg border border-text-grey hover:border-red-primary'
+                      : isDarkMode
+                        ? 'bg-dark-secondary text-text-light hover:bg-dark-bg border border-text-grey hover:border-red-primary'
+                        : 'bg-light-secondary text-text-dark hover:bg-light-hover border border-light-hover hover:border-red-primary'
                   }`}
                 >
                   <span className="text-lg">{reaction.emoji}</span>
@@ -158,6 +160,7 @@ export const StoryDetails = () => {
           storyId={id}
           comments={comments}
           onCommentAdded={fetchComments}
+          isDarkMode={isDarkMode}
         />
       </div>
     </div>

@@ -41,8 +41,8 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Story content is required' });
     }
 
-    if (content.length > 2000) {
-      return res.status(400).json({ error: 'Story exceeds 2000 character limit' });
+    if (content.length > 4000) {
+      return res.status(400).json({ error: 'Story exceeds 4000 character limit' });
     }
 
     // Spam check

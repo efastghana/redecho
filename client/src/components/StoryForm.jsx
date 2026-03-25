@@ -21,8 +21,8 @@ export const StoryForm = ({ onStoryCreated }) => {
       return;
     }
 
-    if (content.length > 2000) {
-      setError('Story cannot exceed 2000 characters');
+    if (content.length > 4000) {
+      setError('Story cannot exceed 4000 characters');
       return;
     }
 
@@ -78,10 +78,10 @@ export const StoryForm = ({ onStoryCreated }) => {
 
         <div className="mb-4">
           <label className="block text-text-light text-sm font-medium mb-2">
-            Your Story ({content.length}/2000)
+            Your Story ({content.length}/4000 chars, {content.trim() ? content.trim().split(/\s+/).length : 0} words)
           </label>
           <textarea
-            placeholder="Share your story anonymously... (max 2000 characters)"
+            placeholder="Share your story anonymously... (max 4000 characters)"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows="6"
