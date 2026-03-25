@@ -137,6 +137,7 @@ export const markMessageAsRead = async (messageId, token) => {
     headers: { Authorization: `Bearer ${token}` }
   });
   return response.data;
+};
 
 export default {
   fetchStories,
