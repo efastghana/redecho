@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
     story.reactions.emotional = 0;
 
     const reactionCounts = await Reaction.aggregate([
-      { $match: { storyId: require('mongoose').Types.ObjectId(storyId) } },
+      { $match: { storyId: new mongoose.Types.ObjectId(storyId) } },
       { $group: { _id: '$reactionType', count: { $sum: 1 } } }
     ]);
 

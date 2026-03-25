@@ -12,7 +12,7 @@ const storySchema = new mongoose.Schema({
   content: {
     type: String,
     required: true,
-    maxlength: 2000
+    maxlength: 4000
   },
   emotion: {
     type: String,
