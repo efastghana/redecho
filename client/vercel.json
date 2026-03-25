@@ -1,10 +1,7 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "envs": [
-    {
-      "key": "VITE_API_URL",
-      "value": "https://redecho-backend.onrender.com/api"
-    }
-  ]
+  "env": {
+    "VITE_API_URL": "https://redecho-backend.onrender.com/api"
+  }
 }
