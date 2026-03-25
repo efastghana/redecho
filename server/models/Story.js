@@ -25,6 +25,14 @@ const storySchema = new mongoose.Schema({
     support: { type: Number, default: 0 },
     emotional: { type: Number, default: 0 }
   },
+  isBoosted: {
+    type: Boolean,
+    default: false
+  },
+  moderationNotes: {
+    type: String,
+    default: ''
+  },
   createdAt: {
     type: Date,
     default: Date.now

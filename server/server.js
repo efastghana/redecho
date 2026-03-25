@@ -7,6 +7,9 @@ const cors = require('cors');
 const storiesRouter = require('./routes/stories');
 const reactionsRouter = require('./routes/reactions');
 const commentsRouter = require('./routes/comments');
+const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
+const messagesRouter = require('./routes/messages');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -31,6 +34,9 @@ mongoose.connect(MONGODB_URI, {
 app.use('/api/stories', storiesRouter);
 app.use('/api/reactions', reactionsRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/admin', adminRouter);
+app.use('/api/user/messages', messagesRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {
