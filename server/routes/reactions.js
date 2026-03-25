@@ -43,14 +43,16 @@ router.post('/', async (req, res) => {
     story.reactions.support = 0;
     story.reactions.emotional = 0;
 
-    const reactionCounts = await Reaction.aggregate([
-      { $match: { storyId: new mongoose.Types.ObjectId(storyId) } },
-      { $group: { _id: '$reactionType', count: { $sum: 1 } } }
-    ]);
+    // Count reactions manually
+    const relateCount = await Reaction.countDocuments({ storyId, reactionType: 'relate' });
+    const helpfulCount = await Reaction.countDocuments({ storyId, reactionType: 'helpful' });
+    const supportCount = await Reaction.countDocuments({ storyId, reactionType: 'support' });
+    const emotionalCount = await Reaction.countDocuments({ storyId, reactionType: 'emotional' });
 
-    reactionCounts.forEach(rc => {
-      story.reactions[rc._id] = rc.count;
-    });
+    story.reactions.relate = relateCount;
+    story.reactions.helpful = helpfulCount;
+    story.reactions.support = supportCount;
+    story.reactions.emotional = emotionalCount;
 
     await story.save();
     res.json(story);
