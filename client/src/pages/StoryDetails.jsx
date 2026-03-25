@@ -113,7 +113,7 @@ export const StoryDetails = ({ isDarkMode = true }) => {
   };
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-dark-bg' : 'bg-light-bg'}`}>
+    <div className={`min-h-screen ${isDarkMode ? 'bg-dark-bg' : 'bg-light-bg'} pb-20`}>
       <div className="max-w-3xl mx-auto px-4 py-8">
         <Link to="/" className="text-red-primary hover:text-red-700 mb-6 inline-block">← Back to Stories</Link>
 

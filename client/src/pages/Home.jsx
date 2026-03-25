@@ -49,7 +49,7 @@ export const Home = ({ isDarkMode = true }) => {
   };
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-dark-bg' : 'bg-light-bg'}`}>
+    <div className={`min-h-screen ${isDarkMode ? 'bg-dark-bg' : 'bg-light-bg'} pb-20`}>
       <div className="max-w-3xl mx-auto px-4 py-8">
         <div className="mb-12 text-center">
           <h1 className={`text-4xl font-bold mb-2 ${isDarkMode ? 'text-text-light' : 'text-text-dark'}`}>RedEcho</h1>
